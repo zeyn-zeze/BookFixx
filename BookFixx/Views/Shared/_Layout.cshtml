@@ -1,0 +1,56 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>@ViewBag.Title BookFix</title>
+    @Styles.Render("~/Content/css")
+    @Scripts.Render("~/bundles/modernizr")
+</head>
+<body>
+    <!-- Navbar -->
+    <nav class="navbar">
+        <h2 class="title">BookFix</h2>
+        <ul class="menu">
+            <li><a href="@Url.Action("Index", "Home")">ANASAYFA</a></li>
+            @if (ViewBag.IsAdmin != null && ViewBag.IsAdmin)
+            {
+                <li><a href="@Url.Action("Index", "Admin")">Admin Dashboard</a></li>
+            }
+            <li>
+                <i class="bi bi-search">
+                    <input type="text" name="search" placeholder="Search..">
+                </i>
+            </li>
+        </ul>
+        <ul class="menu__icons">
+            <li>
+                <a href="@Url.Action("Profile", "Home")" id="profile-icon">
+                    <i class="bi bi-person"></i>
+                </a>
+            </li>
+            <li class="basket_icon">
+                <a href="@Url.Action("Index", "Cart")" id="profile-icon">
+                    <i class="bi bi-cart4"></i>
+                    <span class="basket_count">@ViewBag.BasketCount</span>
+                </a>
+            </li>
+            <li>
+                <a href="@Url.Action("Logout", "Login")">Çıkış Yap</a>
+            </li>
+        </ul>
+    </nav>
+    <div class="container body-content">
+        @RenderBody()
+        <hr />
+    </div>
+
+    <footer>
+        <p>&copy; 2024 E-Ticaret Sitesi</p>
+    </footer>
+
+    @Scripts.Render("~/bundles/jquery")
+    @Scripts.Render("~/bundles/bootstrap")
+    @RenderSection("scripts", required: false)
+</body>
+</html>

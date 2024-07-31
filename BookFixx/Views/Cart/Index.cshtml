@@ -1,0 +1,71 @@
+﻿@model IEnumerable<BookFixx.database.CartItem>
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Sepetiniz</title>
+    <link rel="stylesheet" href="~/Content/bootstrap.min.css" />
+    <link rel="stylesheet" href="~/Content/css/cart.css" />
+</head>
+<body>
+    <div class="container mt-5">
+        <h2 class="basket_title">Sepetiniz</h2>
+        @if (Model == null || !Model.Any())
+        {
+            <p>Sepetinizde ürün bulunmamaktadır.</p>
+        }
+        else
+        {
+            <ul class="basket_list">
+                @foreach (var item in Model)
+                {
+                    <li class="basket_item">
+                        <div class="basket_item_info">
+                            <div class="book_image">
+                                @if (!string.IsNullOrEmpty(item.Book.ImageData))
+                                {
+                                    <img class="img-fluid shadow" src="data:image/jpg;base64,@item.Book.ImageData" alt="@item.Book.Title" width="200" height="300">
+                                }
+                            </div>
+                            <div class="basket_item_title">@item.Book.Title</div>
+                            <div class="basket_item_author">@item.Book.Author</div>
+                            <div class="basket_item_price">@item.Book.Price TL</div>
+                            <div class="basket_item_quantity">
+                                
+                                <div class="basket_summary">
+                                    Miktar: @item.Quantity
+
+                                    <form method="post" action="@Url.Action("QuantityProcess","Cart")">
+                                        <input type="hidden" name="bookId" value="@item.BookID" />
+                                        <input type="number" name="quantity" value="@item.Quantity" min="1" />
+                                        <button type="submit" class="btn btn-sm btn-primary">Güncelle</button>
+                                    </form>
+                                    <form method="post" action="@Url.Action("RemoveCart", "Cart")" class="d-inline">
+                                        <input type="hidden" name="bookId" value="@item.BookID" />
+                                        <button type="submit" class="btn btn-sm btn-danger">Kaldır</button>
+                                    </form>
+                                </div>
+
+                            </div>
+                        </div>
+                    </li>
+                }
+            </ul>
+
+            <div class="basket_summary">
+                Toplam: @(Model.Sum(item => item.Book.Price * item.Quantity).ToString("C"))
+                <button class="btn btn-primary btn-lg">Satın Al</button>
+            </div>
+        }
+    </div>
+
+    <script type="text/javascript" src="~/Scripts/bootstrap.min.js"></script>
+    <script type="text/javascript" src="~/Content/js/app.js"></script>
+</body>
+</html>

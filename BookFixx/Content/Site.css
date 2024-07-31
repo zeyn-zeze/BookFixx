@@ -1,0 +1,412 @@
+﻿@import url("https://cdn.jsdelivr.net/npm/bootstrap-icons@1.8.1/font/bootstrap-icons.css");
+
+* {
+    font-family: "Montserrat", sans-serif;
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+}
+
+:root {
+    --black: #1c2a39;
+    --gray: #5c6a79;
+    --purple: #4c3db2;
+}
+
+.navbar {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    background-color: #fff;
+    z-index: 1;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+body {
+    margin-top: 100px;
+}
+
+.title {
+    margin-left: 10px;
+    font-weight: bold;
+    font-style: italic;
+    color: var(--purple);
+}
+
+.menu,
+.menu__icons {
+    margin-left: 20px;
+    list-style: none;
+    display: flex;
+    flex-direction: row;
+    font-size: 20px;
+    color: var(--purple);
+    cursor: pointer;
+}
+
+    .menu li,
+    .menu__icons li {
+        margin: 5px 10px;
+    }
+
+    .menu :active {
+        color: var(--black);
+        font-weight: bold;
+    }
+
+    .menu__icons li {
+        color: var(--black);
+    }
+
+.basket_icon {
+    position: relative;
+}
+
+.basket_count {
+    position: absolute;
+    right: -0.7em;
+    bottom: 0;
+    width: 20px;
+    height: 20px;
+    background-color: var(--black);
+    border-radius: 50%;
+    color: white;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 1rem;
+    font-weight: bold;
+}
+
+.slider {
+    width: 80%;
+    margin: 0 auto;
+}
+
+    .slider img {
+        height: 80%;
+        object-fit: cover;
+    }
+
+.store {
+    width: 100%;
+    margin: 0 auto;
+}
+
+.book_card_container {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    grid-template-rows: repeat(2, auto);
+    gap: 10px;
+    justify-items: start;
+}
+
+.book_card {
+    margin-top: 20px;
+    display: flex;
+    flex-direction: row;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    width:400px;
+    height: 400px; /* Sabit yükseklik ayarlandı */
+    position: relative;
+
+}
+
+.book_image {
+    flex: 0 0 200px;
+    overflow: hidden;
+}
+
+    .book_image img {
+        width: 100%;
+        height: auto;
+        object-fit: cover;
+    }
+
+.book_details {
+    flex: 1;
+    padding: 15px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    box-sizing: border-box;
+    overflow:hidden;
+}
+
+.book_info {
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 15px;
+}
+
+.book_author {
+    font-family: 'Courier New', Courier, monospace;
+    color: var(--gray);
+    font-size: 0.9rem;
+}
+
+.book_title {
+    font-size: 1.1rem;
+    font-weight: bold;
+    margin-top: 5px;
+}
+
+.book_star_rate {
+    display: flex;
+    align-items: center;
+    margin-top: 10px;
+}
+
+    .book_star_rate .bi-star,
+    .book_star_rate .bi-star-fill {
+        color: #eeedf5;
+        font-size: 1rem;
+        margin-right: 5px;
+    }
+
+.book_description {
+    flex-grow: 1;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    display: -webkit-box;
+
+}
+
+.price {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: 10px;
+}
+
+.current_price {
+    font-size: 1rem;
+    font-weight: bold;
+}
+
+.original_price {
+    text-decoration: line-through;
+    color: var(--gray);
+}
+
+button {
+    cursor: pointer;
+    border: 2px solid var(--purple);
+    color: var(--purple);
+    font-size: 14px;
+    font-weight: bold;
+    background-color: transparent;
+    transition: all 250ms;
+    padding: 8px 12px;
+    border-radius: 5px;
+}
+
+    button:hover {
+        background-color: var(--purple);
+        color: white;
+    }
+
+
+
+
+.basket_modal {
+    position: fixed;
+    left: 0;
+    top: 0;
+    background-color: rgba(0, 0, 0, 0.7);
+    width: 100%;
+    height: 100%;
+    z-index: 2;
+    visibility: hidden;
+    opacity: 0;
+    transition: visibility 0.3s, opacity 0.3s;
+}
+
+    .basket_modal.visible {
+        visibility: visible;
+        opacity: 1;
+    }
+
+.basket_items {
+    width: 300px;
+    background-color: white;
+    height: 100%;
+    float: right;
+    transform: translateX(100%);
+    transition: transform 0.3s;
+}
+
+.basket_modal.visible .basket_items {
+    transform: translateX(0);
+}
+
+.close-btn {
+    font-size: 2rem;
+    position: absolute;
+    top: 10px;
+    right: 20px;
+    cursor: pointer;
+}
+
+.basket_title {
+    color: var(--purple);
+    margin-top: 1rem;
+    margin-bottom: 1rem;
+    text-align: center;
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: x-large;
+    font-weight: bold;
+}
+
+.basket_list {
+    list-style-type: none;
+    padding: 0 5px;
+    max-height: 400px;
+    overflow-y: auto;
+}
+
+    .basket_list li {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        border-bottom: 1px dashed #4c3db2;
+        border-radius: 5px;
+        padding: 10px 0;
+    }
+
+.basket-item-info {
+    flex: 1;
+    margin-right: 10px;
+    text-align: center;
+}
+
+    .basket-item-info .book-name {
+        font-size: 16px;
+        font-weight: bold;
+    }
+
+    .basket-item-info .book-price {
+        font-size: 14px;
+    }
+
+    .basket-item-info .book-remove {
+        cursor: pointer;
+        color: var(--gray);
+    }
+
+.book-remove:hover {
+    color: red;
+    font-weight: bold;
+}
+
+.book_image {
+    flex: 0 0 120px;
+    margin-left: 10px;
+    margin-top: 2rem;
+}
+
+    .book_image img {
+        width: 100%;
+        height: auto;
+    }
+
+.basket_items.book-count {
+    font-size: 1.5rem;
+    color: var(--black);
+    font-weight: bold;
+}
+
+.book-count .increase {
+    margin-right: 5px;
+}
+
+.increase:hover {
+    font-size: 20px;
+    color: greenyellow;
+}
+
+.decrease:hover {
+    font-size: 20px;
+    color: red;
+}
+
+.book-count .decrease {
+    margin-left: 5px;
+}
+
+.book-count .increase,
+.decrease {
+    cursor: pointer;
+    color: var(--purple);
+}
+
+.basket_total {
+    display: flex;
+    flex-direction: column;
+    position: absolute;
+    bottom: 10px;
+    align-items: center;
+    width: inherit;
+    font-weight: bold;
+}
+
+    .basket_total button {
+        width: 260px;
+    }
+
+input[type=text] {
+    width: 100px;
+    -webkit-transition: width 0.15s linear;
+    transition: width 0.15s linear;
+    height: 2rem;
+}
+
+.book_price,
+.book_title,
+.book_total {
+    font-size: 1.2rem;
+    margin: 0;
+}
+
+.book_price {
+    color: darkgreen;
+    font-weight: bold;
+}
+
+.book_total {
+    color: darkslateblue;
+}
+
+button,
+input[type=text] {
+    border-radius: 8px;
+    border: 1px solid var(--purple);
+    background-color: white;
+    color: var(--purple);
+}
+
+button {
+    padding: 8px 16px;
+    cursor: pointer;
+    font-size: 1rem;
+    font-weight: bold;
+    transition: all 0.2s ease-in-out;
+}
+
+    button:hover {
+        background-color: var(--purple);
+        color: white;
+    }
+
+    button:active {
+        transform: scale(0.95);
+    }
+
+input[type=text]:focus {
+    width: 200px;
+    outline: none;
+    border: 1px solid var(--purple);
+}

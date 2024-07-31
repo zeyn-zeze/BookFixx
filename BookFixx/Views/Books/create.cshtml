@@ -1,0 +1,75 @@
+﻿@model BookFixx.database.Book
+
+@{
+    Layout = "~/Views/Shared/Admin_Layout.cshtml";
+    ViewBag.Title = "Create Book";
+}
+
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="utf-8" />
+    <title>Add Book</title>
+    <link rel="stylesheet" href="~/Content/css/create.css" />
+</head>
+
+<body>
+    <div class="container">
+        <h2>Kitap Ekle</h2>
+
+        @using (Html.BeginForm("Create", "Books", FormMethod.Post, new { enctype = "multipart/form-data" }))
+        {
+            @Html.AntiForgeryToken() 
+
+            <div class="form-group">
+                @Html.LabelFor(m => m.Title, "Başlık")
+                @Html.TextBoxFor(m => m.Title, new { @class = "form-control" })
+                @Html.ValidationMessageFor(m => m.Title)
+            </div>
+
+            <div class="form-group">
+                @Html.LabelFor(m => m.Author, "Yazar")
+                @Html.TextBoxFor(m => m.Author, new { @class = "form-control" })
+                @Html.ValidationMessageFor(m => m.Author)
+            </div>
+
+            <div class="form-group">
+                @Html.LabelFor(m => m.Publisher, "Yayınevi")
+                @Html.TextBoxFor(m => m.Publisher, new { @class = "form-control" })
+                @Html.ValidationMessageFor(m => m.Publisher)
+            </div>
+
+            <div class="form-group">
+                @Html.LabelFor(m => m.Price, "Fiyat")
+                @Html.TextBoxFor(m => m.Price, new { @class = "form-control" })
+                @Html.ValidationMessageFor(m => m.Price)
+            </div>
+
+            <div class="form-group">
+                @Html.LabelFor(m => m.Stock, "Stok")
+                @Html.TextBoxFor(m => m.Stock, new { @class = "form-control" })
+                @Html.ValidationMessageFor(m => m.Stock)
+            </div>
+
+            <div class="form-group">
+                @Html.LabelFor(m => m.Description, "Açıklama")
+                @Html.TextAreaFor(m => m.Description, new { @class = "form-control" })
+                @Html.ValidationMessageFor(m => m.Description)
+            </div>
+
+            <div class="form-group">
+                @Html.LabelFor(m => m.CategoryID, "Kategori")
+                @Html.DropDownListFor(m => m.CategoryID, (SelectList)ViewBag.Categories, "Kategori Seçin", new { @class = "form-control" })
+                @Html.ValidationMessageFor(m => m.CategoryID)
+            </div>
+
+            <div class="form-group">
+                <label for="ImageData">Kapak Resmi</label>
+                <input type="file" name="ImageData" class="form-control" />
+            </div>
+
+            <button type="submit" class="btn btn-primary">Kaydet</button>
+        }
+    </div>
+</body>
+</html>

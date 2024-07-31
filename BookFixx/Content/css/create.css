@@ -1,0 +1,76 @@
+﻿/* Form container */
+
+h2 {
+    text-align: center;
+    color:  var(--purple);
+}
+form {
+    width: 80%;
+    max-width: 600px;
+    margin: 0 auto; /* Ortalamak için */
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    background-color: #fff;
+}
+
+/* Form-group */
+.form-group {
+    margin-bottom: 1.5em;
+}
+
+    /* Label */
+    .form-group label {
+        display: block;
+        font-weight: bold;
+        margin-bottom: 0.5em;
+        color: var(--purple);
+    }
+
+/* Input and textarea */
+.form-control {
+    width: 100%;
+    padding: 0.75em;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    box-sizing: border-box;
+}
+
+/* Select */
+.form-group select.form-control {
+    height: 2.5em;
+    padding: 0.5em;
+}
+
+/* Button */
+.btn-primary {
+    background-color: var(--purple);
+    color: #fff;
+    border: none;
+    padding: 0.75em 1.5em;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 1em;
+    margin: 1em 0;
+    cursor: pointer;
+    border-radius: 4px;
+    transition: background-color 0.3s;
+}
+
+    .btn-primary:hover {
+        background-color: #5a33a8; /* Renk değişikliği */
+    }
+
+/* File input */
+input[type="file"] {
+    border: none;
+    padding: 0.5em;
+}
+
+/* Styling for text areas */
+textarea {
+    
+    height: 150px; /* Hight of the textarea */
+    resize: vertical;
+}

@@ -1,0 +1,72 @@
+﻿@model BookFixx.Models.RegisterModel
+
+@{
+    ViewBag.Title = "Register";
+    Layout = null;
+}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Kayıt Ol</title>
+
+    <link href="https://cdn.jsdelivr.net/npm/remixicon@2.5.0/fonts/remixicon.css" rel="stylesheet">
+    <link rel="stylesheet" href="~/Content/css/register.css" />
+</head>
+<body>
+    <div class="register">
+        @using (Html.BeginForm("Register", "Account", FormMethod.Post, new { @class = "register__form" }))
+        {
+            @Html.AntiForgeryToken()
+
+            <h2 class="register__title">Kayıt Ol</h2>
+
+            <div class="form-group">
+                @Html.LabelFor(model => model.Username)
+                @Html.TextBoxFor(model => model.Username, new { @class = "form-control" })
+                @Html.ValidationMessageFor(model => model.Username)
+            </div>
+
+            <div class="form-group">
+                @Html.LabelFor(model => model.TC)
+                @Html.TextBoxFor(model => model.TC, new { @class = "form-control" })
+                @Html.ValidationMessageFor(model => model.TC)
+            </div>
+
+            <div class="form-group">
+                @Html.LabelFor(model => model.FirstName)
+                @Html.TextBoxFor(model => model.FirstName, new { @class = "form-control" })
+                @Html.ValidationMessageFor(model => model.FirstName)
+            </div>
+
+            <div class="form-group">
+                @Html.LabelFor(model => model.LastName)
+                @Html.TextBoxFor(model => model.LastName, new { @class = "form-control" })
+                @Html.ValidationMessageFor(model => model.LastName)
+            </div>
+
+            <div class="form-group">
+                @Html.LabelFor(model => model.Email)
+                @Html.TextBoxFor(model => model.Email, new { @class = "form-control" })
+                @Html.ValidationMessageFor(model => model.Email)
+            </div>
+
+            <div class="form-group">
+                @Html.LabelFor(model => model.PhoneNumber)
+                @Html.TextBoxFor(model => model.PhoneNumber, new { @class = "form-control" })
+                @Html.ValidationMessageFor(model => model.PhoneNumber)
+            </div>
+
+            <div class="form-group">
+                @Html.LabelFor(model => model.Password)
+                @Html.PasswordFor(model => model.Password, new { @class = "form-control" })
+                @Html.ValidationMessageFor(model => model.Password)
+            </div>
+
+            <button type="submit" class="register__button">Kayıt Ol</button>
+        }
+    </div>
+</body>
+</html>

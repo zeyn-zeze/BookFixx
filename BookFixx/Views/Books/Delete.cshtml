@@ -1,0 +1,31 @@
+﻿@model BookFixx.database.Book
+
+@{
+    ViewBag.Title = "Delete Book";
+    Layout = "~/Views/Shared/Admin_Layout.cshtml";
+}
+
+<h2>Delete Book</h2>
+
+<div>
+    <h4>Are you sure you want to delete this book?</h4>
+    <div>
+        <h4>@Model.Title</h4>
+        <p>
+            <strong>Author:</strong> @Model.Author<br />
+            <strong>Publisher:</strong> @Model.Publisher<br />
+            <strong>Description:</strong> @Model.Description<br />
+            <strong>Stock:</strong> @Model.Stock<br />
+            <strong>Price:</strong> @Model.Price<br />
+            <img class="img-fluid shadow" src="data:image/jpg;base64,@Model.ImageData" alt="@Model.Title" width="200" height="300">
+        </p>
+
+        @using (Html.BeginForm("Delete", "Books", FormMethod.Post))
+        {
+            @Html.AntiForgeryToken()
+            @Html.HiddenFor(model => model.BookID)
+            <input type="submit" value="Delete" class="btn btn-danger" />
+            @Html.ActionLink("Cancel", "Index", new { @class = "btn btn-secondary" })
+        }
+    </div>
+</div>

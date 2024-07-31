@@ -1,0 +1,97 @@
+﻿@model Tuple<IEnumerable<BookFixx.database.User>, IEnumerable<BookFixx.database.Book>>
+
+@{
+    ViewBag.Title = "Admin Anasayfa";
+    Layout = "~/Views/Shared/Admin_Layout.cshtml";
+}
+<head>
+    <link rel="stylesheet" type="text/css" href="~/Content/Admin.css" />
+    <!-- Diğer başlık içeriğiniz -->
+</head>
+
+
+<div class="admin-dashboard">
+
+    <main class="main-content">
+
+
+        <h2>Kullanıcı İşlemleri</h2>
+
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>@Html.DisplayNameFor(model => model.Item1.First().Username)</th>
+                    <th>@Html.DisplayNameFor(model => model.Item1.First().TC)</th>
+                    <th>@Html.DisplayNameFor(model => model.Item1.First().FirstName)</th>
+                    <th>@Html.DisplayNameFor(model => model.Item1.First().LastName)</th>
+                    <th>@Html.DisplayNameFor(model => model.Item1.First().Password)</th>
+                    <th>@Html.DisplayNameFor(model => model.Item1.First().Email)</th>
+                    <th>@Html.DisplayNameFor(model => model.Item1.First().phoneNumber)</th>
+                    <th>@Html.DisplayNameFor(model => model.Item1.First().Role)</th>
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var item in Model.Item1)
+                {
+                    <tr>
+                        <td>@Html.DisplayFor(modelItem => item.Username)</td>
+                        <td>@Html.DisplayFor(modelItem => item.TC)</td>
+                        <td>@Html.DisplayFor(modelItem => item.FirstName)</td>
+                        <td>@Html.DisplayFor(modelItem => item.LastName)</td>
+                        <td>@Html.DisplayFor(modelItem => item.Password)</td>
+                        <td>@Html.DisplayFor(modelItem => item.Email)</td>
+                        <td>@Html.DisplayFor(modelItem => item.phoneNumber)</td>
+                        <td>@Html.DisplayFor(modelItem => item.Role)</td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+
+        <h2>Kitap İşlemleri</h2>
+
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>@Html.DisplayNameFor(model => model.Item2.First().Title)</th>
+                    <th>@Html.DisplayNameFor(model => model.Item2.First().Author)</th>
+                    <th>@Html.DisplayNameFor(model => model.Item2.First().Publisher)</th>
+                    <th>@Html.DisplayNameFor(model => model.Item2.First().Description)</th>
+                    <th>@Html.DisplayNameFor(model => model.Item2.First().Stock)</th>
+                    <th>@Html.DisplayNameFor(model => model.Item2.First().Price)</th>
+                    <th>@Html.DisplayNameFor(model => model.Item2.First().ImageData)</th>
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var item in Model.Item2)
+                {
+                    <tr>
+                        <td>@Html.DisplayFor(modelItem => item.Title)</td>
+                        <td>@Html.DisplayFor(modelItem => item.Author)</td>
+                        <td>@Html.DisplayFor(modelItem => item.Publisher)</td>
+                        <td>@Html.DisplayFor(modelItem => item.Description)</td>
+                        <td>@Html.DisplayFor(modelItem => item.Stock)</td>
+                        <td>@Html.DisplayFor(modelItem => item.Price)</td>
+                        <td><img class="img-fluid shadow" src="data:image/jpg;base64,@item.ImageData" alt="@item.Title" width="200" height="300"></td>
+                    </tr>
+                }
+            </tbody>
+
+
+        </table>
+
+
+
+        <div class="dashboard-widgets">
+            <div class="widget">
+                <h3>Toplam Kitap</h3>
+                <p>@ViewBag.TotalBooks</p>
+            </div>
+            <div class="widget">
+                <h3>Toplam Kullanıcı</h3>
+                <p>@ViewBag.TotalUsers</p>
+            </div>
+        </div>
+    </main>
+</div>
